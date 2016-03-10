@@ -9,25 +9,50 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, UIScrollViewDelegate {
+    
+    var nameTextField:UITextField!
+    var yourNameLabel:SKLabelNode!
+    var fineHouaLabel:SKLabelNode!
+    var myAlert:UIAlertController!
+    var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let scene = GameScene(fileNamed:"GameScene") {
-            // Configure the view.
+        if let scene = MainSplash(fileNamed:"MainSplash") {
             let skView = self.view as! SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            
+            scene.scaleMode = .ResizeFill
             skView.presentScene(scene)
         }
+    }
+    
+    class func colorWithHexString (hex:String) -> UIColor {
+        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+        if (cString.hasPrefix("#")) {cString = (cString as NSString).substringFromIndex(1)}
+        if (cString.characters.count != 6) {return UIColor.grayColor()}
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
+        NSScanner(string: rString).scanHexInt(&r)
+        NSScanner(string: gString).scanHexInt(&g)
+        NSScanner(string: bString).scanHexInt(&b)
+        return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+    }
+    
+    @IBAction func showAlert(sender:AnyObject) {
+        myAlert = UIAlertController(title: "Alert", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){(ACTION) in
+            print("Ok");
+        }
+        
+        myAlert.addAction(okAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
     }
 
     override func shouldAutorotate() -> Bool {
