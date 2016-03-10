@@ -46,7 +46,7 @@ class MainSplash: SKScene {
         self.nameTextField = UITextField(frame: CGRect(x: self.xMid - 175.00, y: self.yMid - 50, width: 350.00, height: 55.00))
         self.nameTextField.attributedPlaceholder = NSAttributedString(string: "Your name", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         self.nameTextField.textColor = UIColor.whiteColor()
-        self.nameTextField.font = UIFont(name: "Chalkduster", size: 24.00)
+        self.nameTextField.font = UIFont(name: "Cochin-Italic", size: 30.00)
         self.nameTextField.backgroundColor = GameViewController.colorWithHexString("#232323")
         self.nameTextField.tintColor = GameViewController.colorWithHexString("#ffffff")
         self.nameTextField.textAlignment = .Center
