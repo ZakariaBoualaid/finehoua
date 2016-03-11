@@ -18,6 +18,10 @@
 		1D96869F1C91E8B200C19193 /* FineHouaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D96869E1C91E8B200C19193 /* FineHouaUITests.swift */; };
 		1D9686AD1C91FD5800C19193 /* MainSplash.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1D9686AC1C91FD5800C19193 /* MainSplash.sks */; };
 		1D9686AF1C91FD8F00C19193 /* MainSplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9686AE1C91FD8F00C19193 /* MainSplash.swift */; };
+		1D9686B11C926B6300C19193 /* ConfigScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1D9686B01C926B6200C19193 /* ConfigScene.sks */; };
+		1D9686B51C926BBA00C19193 /* ConfigScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9686B41C926BBA00C19193 /* ConfigScene.swift */; };
+		1D9686CF1C92891300C19193 /* Player.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D9686CD1C92891300C19193 /* Player.xcdatamodeld */; };
+		1D9686D51C9289B900C19193 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9686D41C9289B900C19193 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		1D9686A01C91E8B200C19193 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D9686AC1C91FD5800C19193 /* MainSplash.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainSplash.sks; sourceTree = "<group>"; };
 		1D9686AE1C91FD8F00C19193 /* MainSplash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSplash.swift; sourceTree = "<group>"; };
+		1D9686B01C926B6200C19193 /* ConfigScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ConfigScene.sks; sourceTree = "<group>"; };
+		1D9686B41C926BBA00C19193 /* ConfigScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigScene.swift; sourceTree = "<group>"; };
+		1D9686CE1C92891300C19193 /* Player.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Player.xcdatamodel; sourceTree = "<group>"; };
+		1D9686D41C9289B900C19193 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 		1D96866E1C91E8B100C19193 = {
 			isa = PBXGroup;
 			children = (
+				1D9686CD1C92891300C19193 /* Player.xcdatamodeld */,
 				1D9686791C91E8B100C19193 /* FineHoua */,
 				1D9686921C91E8B200C19193 /* FineHouaTests */,
 				1D96869D1C91E8B200C19193 /* FineHouaUITests */,
@@ -105,11 +114,9 @@
 		1D9686791C91E8B100C19193 /* FineHoua */ = {
 			isa = PBXGroup;
 			children = (
+				1D9686B71C926C0B00C19193 /* Code */,
+				1D9686B61C926BFB00C19193 /* Scenes */,
 				1D96867A1C91E8B100C19193 /* AppDelegate.swift */,
-				1D96867C1C91E8B100C19193 /* GameScene.sks */,
-				1D9686AC1C91FD5800C19193 /* MainSplash.sks */,
-				1D9686AE1C91FD8F00C19193 /* MainSplash.swift */,
-				1D96867E1C91E8B100C19193 /* GameScene.swift */,
 				1D9686801C91E8B100C19193 /* GameViewController.swift */,
 				1D9686821C91E8B100C19193 /* Main.storyboard */,
 				1D9686851C91E8B100C19193 /* Assets.xcassets */,
@@ -135,6 +142,27 @@
 				1D9686A01C91E8B200C19193 /* Info.plist */,
 			);
 			path = FineHouaUITests;
+			sourceTree = "<group>";
+		};
+		1D9686B61C926BFB00C19193 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1D9686AC1C91FD5800C19193 /* MainSplash.sks */,
+				1D9686B01C926B6200C19193 /* ConfigScene.sks */,
+				1D96867C1C91E8B100C19193 /* GameScene.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		1D9686B71C926C0B00C19193 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				1D9686AE1C91FD8F00C19193 /* MainSplash.swift */,
+				1D9686B41C926BBA00C19193 /* ConfigScene.swift */,
+				1D96867E1C91E8B100C19193 /* GameScene.swift */,
+				1D9686D41C9289B900C19193 /* Player.swift */,
+			);
+			name = Code;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +276,7 @@
 				1D9686891C91E8B100C19193 /* LaunchScreen.storyboard in Resources */,
 				1D9686861C91E8B100C19193 /* Assets.xcassets in Resources */,
 				1D9686AD1C91FD5800C19193 /* MainSplash.sks in Resources */,
+				1D9686B11C926B6300C19193 /* ConfigScene.sks in Resources */,
 				1D9686841C91E8B100C19193 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,8 +304,11 @@
 			files = (
 				1D96867F1C91E8B100C19193 /* GameScene.swift in Sources */,
 				1D9686811C91E8B100C19193 /* GameViewController.swift in Sources */,
+				1D9686CF1C92891300C19193 /* Player.xcdatamodeld in Sources */,
 				1D96867B1C91E8B100C19193 /* AppDelegate.swift in Sources */,
+				1D9686D51C9289B900C19193 /* Player.swift in Sources */,
 				1D9686AF1C91FD8F00C19193 /* MainSplash.swift in Sources */,
+				1D9686B51C926BBA00C19193 /* ConfigScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +454,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xlab.FineHoua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -433,6 +466,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xlab.FineHoua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -523,6 +557,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1D9686CD1C92891300C19193 /* Player.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1D9686CE1C92891300C19193 /* Player.xcdatamodel */,
+			);
+			currentVersion = 1D9686CE1C92891300C19193 /* Player.xcdatamodel */;
+			path = Player.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1D96866F1C91E8B100C19193 /* Project object */;
 }

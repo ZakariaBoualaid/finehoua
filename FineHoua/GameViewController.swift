@@ -8,8 +8,10 @@
 
 import UIKit
 import SpriteKit
+import CoreData
+import Foundation
 
-class GameViewController: UIViewController, UIScrollViewDelegate {
+class GameViewController: UIViewController {
     
     var nameTextField:UITextField!
     var yourNameLabel:SKLabelNode!
@@ -24,9 +26,22 @@ class GameViewController: UIViewController, UIScrollViewDelegate {
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.ignoresSiblingOrder = true
+            skView.backgroundColor = GameViewController.colorWithHexString(appBgColor)
+            scene.backgroundColor = GameViewController.colorWithHexString(appBgColor)
             scene.scaleMode = .ResizeFill
             skView.presentScene(scene)
         }
+    }
+    
+    class func adjustLabelFontSizeToFitRect(labelNode:SKLabelNode, rect:CGRect, ratio: CGFloat) {
+        let scalingFactor = min(rect.width / labelNode.frame.width, rect.height / labelNode.frame.height)
+        labelNode.fontSize *= scalingFactor / ratio
+    }
+    
+    class func adjustButtonWidthToFitRect(button:UIButton, rect:CGRect, ratio: CGFloat) {
+        let scalingFactor = min(rect.width / button.frame.width, rect.height / button.frame.height)
+        //button.titleLabel!.sizeThatFits(CGSize(width: rect.width, height: rect.height))
+        //button.titleLabel!.sizeToFit()
     }
     
     class func colorWithHexString (hex:String) -> UIColor {
@@ -41,18 +56,6 @@ class GameViewController: UIViewController, UIScrollViewDelegate {
         NSScanner(string: gString).scanHexInt(&g)
         NSScanner(string: bString).scanHexInt(&b)
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
-    }
-    
-    @IBAction func showAlert(sender:AnyObject) {
-        myAlert = UIAlertController(title: "Alert", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){(ACTION) in
-            print("Ok");
-        }
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
     }
 
     override func shouldAutorotate() -> Bool {
