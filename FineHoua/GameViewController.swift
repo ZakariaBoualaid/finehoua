@@ -11,6 +11,15 @@ import SpriteKit
 import CoreData
 import Foundation
 
+var mainSplash: MainSplash!
+var configScene: ConfigScene!
+var gameScene: GameScene!
+var newPlayerScene: NewPlayerScene!
+var scoreTableScene: ScoreTableScene!
+var allPlayers:[Player] = []
+var currentPlayer:Player!
+var scalingFactor:Float!
+
 class GameViewController: UIViewController {
     
     var nameTextField:UITextField!
@@ -18,19 +27,56 @@ class GameViewController: UIViewController {
     var fineHouaLabel:SKLabelNode!
     var myAlert:UIAlertController!
     var scrollView: UIScrollView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let scene = MainSplash(fileNamed:"MainSplash") {
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            skView.ignoresSiblingOrder = true
-            skView.backgroundColor = GameViewController.colorWithHexString(appBgColor)
-            scene.backgroundColor = GameViewController.colorWithHexString(appBgColor)
-            scene.scaleMode = .ResizeFill
-            skView.presentScene(scene)
-        }
+        mainSplash = MainSplash(fileNamed:"MainSplash")
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.frameInterval = 1
+        skView.ignoresSiblingOrder = true
+        skView.backgroundColor = GameViewController.colorWithHexString(appBgColor)
+        skView.multipleTouchEnabled = true
+        mainSplash.backgroundColor = GameViewController.colorWithHexString(appBgColor)
+        mainSplash.scaleMode = .ResizeFill
+        skView.presentScene(mainSplash)
+    }
+    
+    class func startGame() {
+        configScene.hidden = true
+        configScene.startButton.hidden = true
+        gameScene = GameScene(fileNamed: "GameScene")
+        gameScene.scaleMode = .ResizeFill
+        let transition:SKTransition = SKTransition.crossFadeWithDuration(1.0)
+        configScene.view!.presentScene(gameScene!, transition: transition)
+    }
+    
+    class func restartGame() {
+        scoreTableScene.hidden = true
+        scoreTableScene.replayGameButton.hidden = true
+        let transition:SKTransition = SKTransition.crossFadeWithDuration(1.0)
+        scoreTableScene.view!.presentScene(gameScene!, transition: transition)
+    }
+    
+    class func showTableScore(scene: SKScene){
+        newPlayerScene.hidden = true
+        newPlayerScene.nameTextField.hidden = true
+        newPlayerScene.saveScoreButton.hidden = true
+        scoreTableScene = ScoreTableScene(fileNamed: "ScoreTableScene")
+        scoreTableScene.scaleMode = .ResizeFill
+        let transition = SKTransition.fadeWithDuration(0.15)
+        scene.view!.presentScene(scoreTableScene!, transition: transition)
+    }
+    
+    class func scalingNodeFactor(node: SKNode, rect: CGRect) -> CGFloat {
+        let sf = min(rect.width / node.frame.width, rect.height / node.frame.height)
+        return sf
+    }
+    
+    class func scalingUIFactor(control: UIButton, rect: CGRect) -> CGFloat {
+        let sf = min(rect.width / control.frame.width, rect.height / control.frame.height)
+        return sf
     }
     
     class func adjustLabelFontSizeToFitRect(labelNode:SKLabelNode, rect:CGRect, ratio: CGFloat) {
@@ -38,10 +84,16 @@ class GameViewController: UIViewController {
         labelNode.fontSize *= scalingFactor / ratio
     }
     
-    class func adjustButtonWidthToFitRect(button:UIButton, rect:CGRect, ratio: CGFloat) {
-        let scalingFactor = min(rect.width / button.frame.width, rect.height / button.frame.height)
-        //button.titleLabel!.sizeThatFits(CGSize(width: rect.width, height: rect.height))
-        //button.titleLabel!.sizeToFit()
+    class func formatElapsedTime(elapsedTime: CFTimeInterval) -> String {
+        var labelForZero = ""
+        if elapsedTime < 10 { labelForZero = "0" } else { labelForZero = "" }
+        return "\(labelForZero)\(String(format: "%.2f", Float(elapsedTime)))"
+    }
+    
+    class func showOkAlert(msg:String, scene: SKScene){
+        let myAlert: UIAlertController = UIAlertController(title: "Hbess!", message: msg, preferredStyle: .Alert)
+        myAlert.addAction(UIAlertAction(title: "Wakha", style: .Default, handler: nil))
+        scene.view?.window?.rootViewController?.presentViewController(myAlert, animated: true, completion: nil)
     }
     
     class func colorWithHexString (hex:String) -> UIColor {
