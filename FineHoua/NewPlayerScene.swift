@@ -23,7 +23,6 @@ var newScoreLabel:SKLabelNode!
     }
     
     override func willMoveFromView(view: SKView) {
-        
     }
     
     private func showSuccessMessage(){
@@ -61,6 +60,11 @@ var newScoreLabel:SKLabelNode!
         self.newScoreLabel.name = "newScoreLabel"
         self.newScoreLabel.position = CGPoint(x: xMid, y: yMid + 90)
         self.addChild(self.newScoreLabel)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        saveNameOfPlayer()
+        return true
     }
     
     func saveName(sender: UIButton!){

@@ -16,6 +16,7 @@ var configScene: ConfigScene!
 var gameScene: GameScene!
 var newPlayerScene: NewPlayerScene!
 var scoreTableScene: ScoreTableScene!
+var hlfScene: HLFScene!
 var allPlayers:[Player] = []
 var currentPlayer:Player!
 var scalingFactor:Float!
@@ -55,8 +56,21 @@ class GameViewController: UIViewController {
     class func restartGame() {
         scoreTableScene.hidden = true
         scoreTableScene.replayGameButton.hidden = true
+        scoreTableScene.showHallOfFame.hidden = true
+        scoreTableScene.backToSplash.hidden = true
         let transition:SKTransition = SKTransition.crossFadeWithDuration(1.0)
         scoreTableScene.view!.presentScene(gameScene!, transition: transition)
+    }
+    
+    class func showHallOfFame(scene: SKScene){
+        scoreTableScene.hidden = true
+        scoreTableScene.replayGameButton.hidden = true
+        scoreTableScene.showHallOfFame.hidden = true
+        scoreTableScene.backToSplash.hidden = true
+        hlfScene = HLFScene(fileNamed: "HLFScene")
+        hlfScene.scaleMode = .ResizeFill
+        let transition = SKTransition.fadeWithDuration(0.15)
+        scene.view!.presentScene(hlfScene!, transition: transition)
     }
     
     class func showTableScore(scene: SKScene){
@@ -68,7 +82,29 @@ class GameViewController: UIViewController {
         let transition = SKTransition.fadeWithDuration(0.15)
         scene.view!.presentScene(scoreTableScene!, transition: transition)
     }
+
+    class func backToSplash(scene: SKScene){
+        newPlayerScene.nameTextField.hidden = true
+        newPlayerScene.saveScoreButton.hidden = true
+        scoreTableScene.showHallOfFame.hidden = true
+        scoreTableScene.backToSplash.hidden = true
+        newPlayerScene.hidden = true
+        mainSplash = MainSplash(fileNamed: "MainSplash")
+        mainSplash.scaleMode = .ResizeFill
+        scene.view!.presentScene(mainSplash)
+    }
     
+    class func sortAllPlayersByBestScore() -> [Player] {
+        print("All Players Before : \(allPlayers.debugDescription)")
+        
+        allPlayers.sortInPlace { (Player1, Player2) -> Bool in
+            return Player1.bestScore > Player2.bestScore
+        }
+        
+        print("All Players After : \(allPlayers.debugDescription)")
+        return allPlayers
+    }
+
     class func scalingNodeFactor(node: SKNode, rect: CGRect) -> CGFloat {
         let sf = min(rect.width / node.frame.width, rect.height / node.frame.height)
         return sf

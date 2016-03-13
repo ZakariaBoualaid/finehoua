@@ -15,6 +15,8 @@ class ScoreTableScene: SKScene {
     var yourBestScoreLabel:SKLabelNode!
     var congratNewScoreLabel:SKLabelNode!
     @IBOutlet var replayGameButton:UIButton!
+    @IBOutlet var showHallOfFame:UIButton!
+    @IBOutlet var backToSplash:UIButton!
     
     override func didMoveToView(view: SKView) {
         self.backgroundColor = GameViewController.colorWithHexString(appBgColor)
@@ -48,10 +50,32 @@ class ScoreTableScene: SKScene {
         self.replayGameButton.titleLabel!.font = UIFont(name: "Copperplate", size: adapt(30.00))
         self.replayGameButton.addTarget(self, action: "replayPressed:", forControlEvents: .TouchUpInside)
         self.view!.addSubview(replayGameButton)
+        
+        self.showHallOfFame = UIButton(frame: CGRect(x: xMid - adapt(150), y: yMid + adapt(80), width: adapt(300), height: adapt(55)))
+        self.showHallOfFame.backgroundColor = GameViewController.colorWithHexString("#1db954")
+        self.showHallOfFame.setTitle("Hall of Fame", forState: UIControlState.Normal)
+        self.showHallOfFame.titleLabel!.font = UIFont(name: "Copperplate", size: adapt(30.00))
+        self.showHallOfFame.addTarget(self, action: "showHallOfFamePressed:", forControlEvents: .TouchUpInside)
+        self.view!.addSubview(showHallOfFame)
+        
+        self.backToSplash = UIButton(frame: CGRect(x: xMid - adapt(150), y: yMid + adapt(140), width: adapt(300), height: adapt(55)))
+        self.backToSplash.backgroundColor = GameViewController.colorWithHexString("#1db954")
+        self.backToSplash.setTitle("New Player", forState: UIControlState.Normal)
+        self.backToSplash.titleLabel!.font = UIFont(name: "Copperplate", size: adapt(30.00))
+        self.backToSplash.addTarget(self, action: "backToSplashPressed:", forControlEvents: .TouchUpInside)
+        self.view!.addSubview(backToSplash)
     }
     
     func adapt(f: CGFloat) -> CGFloat {
         return self.view!.frame.width / (1024 / f)
+    }
+    
+    func showHallOfFamePressed(sender: UIButton) {
+        GameViewController.showHallOfFame(scoreTableScene)
+    }
+    
+    func backToSplashPressed(sender: UIButton) {
+        GameViewController.backToSplash(scoreTableScene)
     }
     
     func replayPressed(sender: UIButton!){

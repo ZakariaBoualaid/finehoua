@@ -37,6 +37,7 @@ class MainSplash: SKScene, UITextFieldDelegate {
     }
 
     override func didMoveToView(view: SKView) {
+        currentPlayer = nil
         self.backgroundColor = GameViewController.colorWithHexString(appBgColor)
         mainSplash = self
         initVars()
@@ -67,10 +68,6 @@ class MainSplash: SKScene, UITextFieldDelegate {
         self.showConfigSceneButton.addTarget(self, action: "showConfigPressed:", forControlEvents: .TouchUpInside)
         self.view!.addSubview(showConfigSceneButton)
     }
-    
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        return startGame()
-//    }
     
     func showConfigPressed(sender: UIButton!){
         showConfig()
